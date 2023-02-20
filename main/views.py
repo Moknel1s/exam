@@ -31,10 +31,14 @@ class Register(View):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
+            password1 = form.cleaned_data.get('password1')
+            password2 = form.cleaned_data.get('password2')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            email = form.cleaned_data.get('email')
+            user = authenticate(username=username, password1=password1, password2=password2, email=email, first_name=first_name, last_name=last_name)
             login(request, user)
-            return redirect('home')
+            return redirect('/')
         context = {
             'form': form
         }
